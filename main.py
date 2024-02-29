@@ -1,6 +1,7 @@
 import aiohttp
 import asyncio
 import sys
+import json
 from datetime import datetime, timedelta
 
 
@@ -21,6 +22,7 @@ class CurrencyExchangerPrivatBank:
                                      to the default currencies.
                                      Defaults to None.
         """
+
         self.default_currencies = ['USD', 'EUR']
         if extra_currencies:
             self.currencies = self.default_currencies + [
@@ -49,9 +51,10 @@ class CurrencyExchangerPrivatBank:
         Returns:
             A dictionary containing the currency rates for the specified date.
         """
-        formatted_date = date.strftime("%d.%m.%Y")
+
+        format_date = date.strftime("%d.%m.%Y")
         try:
-            async with session.get(self.API_URL + formatted_date) as response:
+            async with session.get(self.API_URL + format_date) as response:
                 response.raise_for_status()
                 data = await response.json()
                 rates = {currency: None for currency in self.currencies}
@@ -60,9 +63,9 @@ class CurrencyExchangerPrivatBank:
                         rates[rate.get('currency')] = {
                             'sale': rate.get('saleRate'),
                             'purchase': rate.get('purchaseRate')}
-                return {formatted_date: rates}
+                return {format_date: rates}
         except aiohttp.ClientError as e:
-            return {formatted_date: f"Failed to retrieve data: {str(e)}"}
+            return {format_date: f"Failed to retrieve data: {str(e)}"}
 
     async def get_rates_for_days(self, days):
         """
@@ -71,8 +74,9 @@ class CurrencyExchangerPrivatBank:
         Parameters:
             days: The number of days for which to retrieve exchange rates.
         """
-        if days > 10:
-            print("Error: Exchange rates can only be retrieved for up to 10 days.")
+
+        if days < 1 or days > 10:
+            print("Error: Number of days must be between 1 and 10.")
             return
 
         async with aiohttp.ClientSession() as session:
@@ -82,7 +86,9 @@ class CurrencyExchangerPrivatBank:
                 tasks.append(self.get_currency_rates(session, date))
 
             results = await asyncio.gather(*tasks)
-            print(results)
+
+            json_output = json.dumps(results, indent=2, ensure_ascii=False)
+            print(json_output)
 
 
 def main():
@@ -93,6 +99,7 @@ def main():
     class, and runs the asynchronous task to get currency exchange rates
     for the specified number of days.
     """
+
     if len(sys.argv) < 2 or not sys.argv[1].isdigit():
         print("Usage: main.py <number_of_days> [additional_currencies...]")
         sys.exit(1)
