@@ -23,14 +23,27 @@ This utility is a simple console application that retrieves and displays the cur
     $ cd goit-python-web-hw5
     # Install the required Python packages:
     $ pip install aiohttp
-    # Run the utility:
-    $ python exchanger.py <number_of_days> [extra_currencies...]
 
-`<number_of_days>`: The number of days to retrieve exchange rates for, up to a maximum of 10 days.
-`[extra_currencies...]`: Optional. A space-separated list of additional currency codes to retrieve exchange rates for.
+This utility offers several modes of operation depending on the provided command-line arguments. Below are the ways you can use this utility:
+
+- Running the utility without any parameters retrieves the exchange rates for USD and EUR for today
+
+        $ python exchanger.py
+
+- Specifying a number as the only parameter retrieves the exchange rates for USD and EUR for the number of days specified, up to 10 days.
+
+        $ python exchanger.py <number_of_days>
+
+- Providing one or more currency codes as parameters retrieves the exchange rates for USD, EUR, and the specified additional currencies for today. Only supported currencies will be considered.
+
+        $ python main.py <currency_codes...>
+
+- Specifying a number followed by one or more currency codes retrieves the exchange rates for USD, EUR, and the specified additional currencies for the number of days specified, up to 10 days.
+
+        $ python exchanger.py <number_of_days> <currency_codes...>
 
 Example:
 
-    python exchanger.py 2 PLN GBP
+    python exchanger.py 3 PLN GBP
 
-This command retrieves and displays the exchange rates for USD, EUR, PLN and GBP from the last 5 days.
+This command retrieves and displays the exchange rates for USD, EUR, PLN and GBP from the last 3 days.
