@@ -47,3 +47,9 @@ Example:
     python exchanger.py 3 PLN GBP
 
 This command retrieves and displays the exchange rates for USD, EUR, PLN and GBP from the last 3 days.
+
+## Supported Currency Codes
+
+The utility supports a wide range of currency codes, including AUD, AZN, BYN, CAD, CHF, CNY, CZK, DKK, EUR, GBP, GEL, HUF, ILS, JPY, KZT, MDL, NOK, PLN, SEK, SGD, TMT, TRY, UAH, USD, UZS, and XAU. 
+
+**NOTE:**  For some of these currencies, PrivatBank exchange rates may not be available on certain days.
