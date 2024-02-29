@@ -28,19 +28,19 @@ This utility offers several modes of operation depending on the provided command
 
 - Running the utility without any parameters retrieves the exchange rates for USD and EUR for today
 
-        $ python exchanger.py
+        python exchanger.py
 
 - Specifying a number as the only parameter retrieves the exchange rates for USD and EUR for the number of days specified, up to 10 days.
 
-        $ python exchanger.py <number_of_days>
+        python exchanger.py <number_of_days>
 
 - Providing one or more currency codes as parameters retrieves the exchange rates for USD, EUR, and the specified additional currencies for today. Only supported currencies will be considered.
 
-        $ python main.py <currency_codes...>
+        python main.py <currency_codes...>
 
 - Specifying a number followed by one or more currency codes retrieves the exchange rates for USD, EUR, and the specified additional currencies for the number of days specified, up to 10 days.
 
-        $ python exchanger.py <number_of_days> <currency_codes...>
+        python exchanger.py <number_of_days> <currency_codes...>
 
 Example:
 
