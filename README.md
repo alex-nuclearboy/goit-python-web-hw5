@@ -36,7 +36,7 @@ This utility offers several modes of operation depending on the provided command
 
 - Providing one or more currency codes as parameters retrieves the exchange rates for USD, EUR, and the specified additional currencies for today. Only supported currencies will be considered.
 
-        python main.py <currency_codes...>
+        python exchanger.py <currency_codes...>
 
 - Specifying a number followed by one or more currency codes retrieves the exchange rates for USD, EUR, and the specified additional currencies for the number of days specified, up to 10 days.
 
