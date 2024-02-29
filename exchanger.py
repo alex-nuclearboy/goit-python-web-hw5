@@ -100,15 +100,17 @@ def main():
     for the specified number of days.
     """
 
-    if len(sys.argv) < 2 or not sys.argv[1].isdigit():
-        print("Usage: main.py <number_of_days> [additional_currencies...]")
-        sys.exit(1)
+    days = 1  # Default number of days
+    extra_currencies = None
 
-    days = int(sys.argv[1])
-    extra_currencies = (
-        [currency.upper() for currency in sys.argv[2:]]
-        if len(sys.argv) > 2 else None
-    )
+    # Check command-line arguments
+    if len(sys.argv) > 1 and sys.argv[1].isdigit():
+        days = int(sys.argv[1])
+        extra_currencies = [currency.upper() for currency in sys.argv[2:]]
+    elif len(sys.argv) > 1:
+        # If the first argument is not a number, assume it is a currency code
+        extra_currencies = [currency.upper() for currency in sys.argv[1:]]
+
     currency_exchanger = CurrencyExchangerPrivatBank(extra_currencies)
     asyncio.run(currency_exchanger.get_rates_for_days(days))
 
